@@ -104,11 +104,15 @@ internal fun AudioBar(
       }
 
       val infinity = stringResource(id = com.quran.mobile.common.ui.core.R.string.infinity)
+      val repeatBadge = if (state.repeat == 0) null else {Add commentMore actions
+        "${state.currentRepeat}/${if (state.repeat == -1) "∞" else state.repeat + 1}"
+      }
       RepeatableButton(
         icon = QuranIcons.Repeat,
         contentDescription = "",
         values = REPEAT_VALUES,
         value = state.repeat,
+        badgeText = repeatBadge,
         defaultValue = 0,
         modifier = Modifier
           .width(40.dp)
@@ -159,7 +163,8 @@ private fun PlayingAudioBarPreview() {
     PlayingAudioBar(
       state = AudioBarState.Playing(
         repeat = 0,
-        speed = 1.0f
+        speed = 1.0f,
+        currentRepeat = 1
       ),
       eventSink = {},
       playbackEventSink = {}
@@ -174,7 +179,8 @@ private fun PausedAudioBarPreview() {
     PausedAudioBar(
       state = AudioBarState.Paused(
         repeat = 1,
-        speed = 0.5f
+        speed = 0.5f,
+        currentRepeat = 1
       ),
       eventSink = {},
       pausedEventSink = {}

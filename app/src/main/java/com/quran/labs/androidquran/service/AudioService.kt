@@ -760,7 +760,8 @@ class AudioService : Service(), OnCompletionListener, OnPreparedListener,
         AudioStatus.Playback(
           localAudioQueue.getCurrentPlaybackAyah(),
           localAudioRequest,
-          state.asPlayingPlaybackStatus()
+          state.asPlayingPlaybackStatus(),
+          localAudioQueue.getTimesPlayed()
         )
       }
     }

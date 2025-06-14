@@ -133,12 +133,14 @@ class AudioBarPresenter @Inject constructor(
 
           PlaybackStatus.PLAYING -> AudioBarState.Playing(
             audioStatus.audioRequest.repeatInfo,
-            audioStatus.audioRequest.playbackSpeed
+            audioStatus.audioRequest.playbackSpeed,
+            audioStatus.repeatIteration
           )
 
           PlaybackStatus.PAUSED -> AudioBarState.Paused(
             audioStatus.audioRequest.repeatInfo,
-            audioStatus.audioRequest.playbackSpeed
+            audioStatus.audioRequest.playbackSpeed,
+            audioStatus.repeatIteration
           )
         }
       }
@@ -208,7 +210,10 @@ class AudioBarPresenter @Inject constructor(
         // pre-emptively update the ui with the repeat even before the service gets it
         val currentAudioBarValue = internalAudioBarFlow.value
         if (currentAudioBarValue is AudioBarState.Playing) {
-          internalAudioBarFlow.value = currentAudioBarValue.copy(repeat = event.repeat)
+          internalAudioBarFlow.value = currentAudioBarValue.copy(
+            repeat = event.repeat,Add commentMore actions
+            currentRepeat = 1
+          )
         }
       } else if (event is AudioBarUiEvent.CommonPlaybackEvent.SetSpeed) {
         // pre-emptively update the ui with the speed even before the service gets it
@@ -227,7 +232,8 @@ class AudioBarPresenter @Inject constructor(
         if (audioStatus is AudioStatus.Playback) {
           internalAudioBarFlow.value = AudioBarState.Paused(
             audioStatus.audioRequest.repeatInfo,
-            audioStatus.audioRequest.playbackSpeed
+            audioStatus.audioRequest.playbackSpeed,
+            audioStatus.repeatIteration
           )
         }
       }

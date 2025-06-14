@@ -25,6 +25,7 @@ fun <T> RepeatableButton(
   defaultValue: T,
   format: (T) -> String,
   modifier: Modifier = Modifier,
+  badgeText: String? = null,
   onValueChanged: (T) -> Unit
 ) {
   Box(contentAlignment = Alignment.Center, modifier = modifier) {
@@ -44,6 +45,15 @@ fun <T> RepeatableButton(
           .padding(end = 8.dp)
       )
     }
+    badgeText?.let {
+      Text(
+        text = it,
+        style = MaterialTheme.typography.labelSmall,Add commentMore actions
+        modifier = Modifier
+          .align(Alignment.BottomStart)
+          .padding(start = 8.dp, bottom = 4.dp)
+      )
+    }
   }
 }
 
@@ -58,6 +68,7 @@ private fun RepeatableButtonPreview() {
       value = 1,
       defaultValue = 0,
       format = { it.toString() },
+      badgeText = "1/3",
       onValueChanged = {}
     )
   }

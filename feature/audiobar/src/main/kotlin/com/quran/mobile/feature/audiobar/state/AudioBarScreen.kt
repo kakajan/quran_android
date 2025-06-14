@@ -4,16 +4,19 @@ internal sealed class AudioBarState {
   sealed class ActivePlayback : AudioBarState() {
     abstract val repeat: Int
     abstract val speed: Float
+    abstract val currentRepeat: Int
   }
 
   data class Playing(
     override val repeat: Int,
-    override val speed: Float
+    override val speed: Float,
+    override val currentRepeat: Int
   ) : ActivePlayback()
 
   data class Paused(
     override val repeat: Int,
-    override val speed: Float
+    override val speed: Float,
+    override val currentRepeat: Int
   ) : ActivePlayback()
 
   data class Stopped(

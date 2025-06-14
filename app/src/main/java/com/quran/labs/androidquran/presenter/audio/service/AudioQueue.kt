@@ -19,7 +19,9 @@ class AudioQueue(private val quranInfo: QuranInfo,
                  private val audioRequest: AudioRequest,
                  initialPlaybackInfo: AudioPlaybackInfo = AudioPlaybackInfo(audioRequest.start)) {
   private var playbackInfo: AudioPlaybackInfo = initialPlaybackInfo
-
+  
+  fun getTimesPlayed(): Int = playbackInfo.timesPlayed
+  
   fun playAt(sura: Int, ayah: Int, skipAyahRepeat: Boolean = false): Boolean {
     val updatedPlaybackInfo =
         if (!skipAyahRepeat && shouldRepeat(audioRequest.repeatInfo, playbackInfo.timesPlayed)) {
